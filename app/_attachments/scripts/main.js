@@ -12,6 +12,20 @@ function createDoc() {
 	doc.lastName = lastName;
 	doc.course = course;
 	doc.grade = parseInt(grade); //we expect this to be a number so we parse it to an int
-	var json = JSON.stringify(doc); //make proper json doc
+	var json = JSON.stringify(doc); //make valid json doc
 	console.log(json);
+	
+	$.ajax({
+		type:			"PUT",
+		url:			"../../" + firstName + "_" + lastName,
+		data:			json, // <-- var
+		contentType:	"application/json", //Don't forget! Otherwise CouchDB says fuck you
+		async:			true, //this is true by default
+		success:		function(data) {
+			console.log(data);
+		},
+		error:			function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
 }
