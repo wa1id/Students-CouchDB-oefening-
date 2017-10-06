@@ -12,6 +12,7 @@ function createDoc() {
 	doc.lastName = lastName;
 	doc.course = course;
 	doc.grade = parseInt(grade); //we expect this to be a number so we parse it to an int
+	doc.type = "student"; //used to filter out design_app later, so only use documents that we created 
 	var json = JSON.stringify(doc); //make valid json doc
 	console.log(json);
 	
@@ -23,6 +24,34 @@ function createDoc() {
 		async:			true, //this is true by default
 		success:		function(data) {
 			console.log(data);
+			buildOutput();
+		},
+		error:			function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+}
+
+function buildOutput() {
+	$("#output").html(""); //clear div
+	$.ajax({
+		type:			"GET",
+		url:			"../../_all_docs?include_docs=true",
+		contentType:	"application/json",
+		async:			true,
+		success:		function(data) {
+			var arr = JSON.parse(data).rows; //convert text to object
+			var htmlString = "<table>";
+			
+			//go through arr, find all student fields in documents and add it to the table htmlString
+			for (var i = 0; i < arr.length; i++) {
+				if(arr[i].doc.type === 'student') { //only get documents where type field is student
+					var doc = arr[i].doc; //found document with type "students", store in var doc
+					htmlString += "<tr><td>" + doc.firstName + "</td><td>" + doc.lastName + "</td><td>" + doc.course + "</td><td>" + doc.grade + "</td></tr>";
+				}
+			}
+			htmlString += "</table>";
+			$("#output").html(htmlString);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
