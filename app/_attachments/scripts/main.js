@@ -1,3 +1,5 @@
+var ALL_DOCS = "../../_all_docs?include_docs=true";
+
 function createDoc() {
 	
 	//get the value of our input fields by id
@@ -24,7 +26,7 @@ function createDoc() {
 		async:			true, //this is true by default
 		success:		function(data) {
 			console.log(data);
-			buildOutput();
+			buildOutput(ALL_DOCS);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -32,11 +34,11 @@ function createDoc() {
 	});
 }
 
-function buildOutput() {
+function buildOutput(view) {
 	$("#output").html(""); //clear div
 	$.ajax({
 		type:			"GET",
-		url:			"../../_all_docs?include_docs=true",
+		url:			view,
 		contentType:	"application/json",
 		async:			true,
 		success:		function(data) {
