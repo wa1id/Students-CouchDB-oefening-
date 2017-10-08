@@ -28,7 +28,7 @@ function createDoc() {
 		success:		function(data) {
 			console.log(data);
 			buildOutput(ALL_DOCS, 0, '');
-			//buildOutput(BY_GRADE, 1, 19);
+			//buildOutput(BY_GRADE, 1, 19); //now used in search function
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -73,4 +73,9 @@ function buildOutput(view, tag, param) {
 			console.log(errorThrown);
 		}
 	});
+}
+
+function search() {
+	var grade = $("#gradeSearch").val(); //get value of textbox
+	buildOutput(BY_GRADE, 1, grade); 
 }
