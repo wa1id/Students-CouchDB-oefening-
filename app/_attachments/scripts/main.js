@@ -37,7 +37,7 @@ function createDoc() {
 }
 
 function buildOutput(view, tag, param) {
-	$("#output").html(""); //clear div
+	$("#output").empty(); //clear div
 	$.ajax({
 		type:			"GET",
 		url:			view + "?key=" + param,
