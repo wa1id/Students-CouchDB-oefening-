@@ -1,4 +1,5 @@
 var ALL_DOCS = "../../_all_docs?include_docs=true";
+var BY_GRADE = "_view/byGrade"; //http://localhost:5984/students/_design/app/_view/byGrade
 
 function createDoc() {
 	
@@ -26,7 +27,8 @@ function createDoc() {
 		async:			true, //this is true by default
 		success:		function(data) {
 			console.log(data);
-			buildOutput(ALL_DOCS);
+			//buildOutput(ALL_DOCS);
+			buildOutput(BY_GRADE, 20);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -34,11 +36,11 @@ function createDoc() {
 	});
 }
 
-function buildOutput(view) {
+function buildOutput(view, param) {
 	$("#output").html(""); //clear div
 	$.ajax({
 		type:			"GET",
-		url:			view,
+		url:			view + "?key=" + param,
 		contentType:	"application/json",
 		async:			true,
 		success:		function(data) {

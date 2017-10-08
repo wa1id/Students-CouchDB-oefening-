@@ -1,6 +1,5 @@
-//
 function(doc) {
 	if (doc.type = "student") {
-		emit(doc.grade, doc);
+		emit(doc.grade, doc); //key, value
 	}
 }
