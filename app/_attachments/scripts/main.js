@@ -27,8 +27,8 @@ function createDoc() {
 		async:			true, //this is true by default
 		success:		function(data) {
 			console.log(data);
-			//buildOutput(ALL_DOCS);
-			buildOutput(BY_GRADE, 1, 19);
+			buildOutput(ALL_DOCS, 0, '');
+			//buildOutput(BY_GRADE, 1, 19);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -38,9 +38,16 @@ function createDoc() {
 
 function buildOutput(view, tag, param) {
 	$("#output").empty(); //clear div
+	
+	//check if param is filled in and use different viewString
+	var viewString = view;
+	if (param) {
+		viewString += "?key=" + param;
+	}
+	
 	$.ajax({
 		type:			"GET",
-		url:			view + "?key=" + param,
+		url:			viewString,
 		contentType:	"application/json",
 		async:			true,
 		success:		function(data) {
