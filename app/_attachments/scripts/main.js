@@ -28,7 +28,7 @@ function createDoc() {
 		success:		function(data) {
 			console.log(data);
 			//buildOutput(ALL_DOCS);
-			buildOutput(BY_GRADE, 19);
+			buildOutput(BY_GRADE, 1, 19);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -36,7 +36,7 @@ function createDoc() {
 	});
 }
 
-function buildOutput(view, param) {
+function buildOutput(view, tag, param) {
 	$("#output").html(""); //clear div
 	$.ajax({
 		type:			"GET",
@@ -49,8 +49,13 @@ function buildOutput(view, param) {
 			
 			//go through arr, find all student fields in documents and add it to the table htmlString
 			for (var i = 0; i < arr.length; i++) {
-				if(arr[i].doc.type === "student") { //only get documents where type field is student
-					var doc = arr[i].doc; //found document with type "students", store in var doc
+				if (tag === 0) { //NOTE: wat is tag??
+					var doc = arr[i].doc;
+				} 
+				else if (tag === 1) {
+					var doc = arr[i].value;
+				}
+				if(doc.type === "student") { //only get documents where type field is student
 					htmlString += "<tr><td>" + doc.firstName + "</td><td>" + doc.lastName + "</td><td>" + doc.course + "</td><td>" + doc.grade + "</td></tr>";
 				}
 			}
