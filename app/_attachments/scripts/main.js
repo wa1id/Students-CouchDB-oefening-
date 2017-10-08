@@ -28,7 +28,7 @@ function createDoc() {
 		success:		function(data) {
 			console.log(data);
 			//buildOutput(ALL_DOCS);
-			buildOutput(BY_GRADE, 20);
+			buildOutput(BY_GRADE, 19);
 		},
 		error:			function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log(errorThrown);
@@ -49,7 +49,7 @@ function buildOutput(view, param) {
 			
 			//go through arr, find all student fields in documents and add it to the table htmlString
 			for (var i = 0; i < arr.length; i++) {
-				if(arr[i].doc.type === 'student') { //only get documents where type field is student
+				if(arr[i].doc.type === "student") { //only get documents where type field is student
 					var doc = arr[i].doc; //found document with type "students", store in var doc
 					htmlString += "<tr><td>" + doc.firstName + "</td><td>" + doc.lastName + "</td><td>" + doc.course + "</td><td>" + doc.grade + "</td></tr>";
 				}
