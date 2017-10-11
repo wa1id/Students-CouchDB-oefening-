@@ -56,7 +56,7 @@ function buildOutput(view, tag, param) {
 			
 			//go through arr, find all student fields in documents and add it to the table htmlString
 			for (var i = 0; i < arr.length; i++) {
-				if (tag === 0) { //NOTE: wat is tag??
+				if (tag === 0) {
 					var doc = arr[i].doc;
 				} 
 				else if (tag === 1) {
